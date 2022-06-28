@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gatecaller.domain.entity.Contact
+import com.gatecaller.domain.repo.INewContactRepo
 import com.gatecaller.domain.usecase.ValidateName
 import com.gatecaller.domain.usecase.ValidateNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NewContactViewModel @Inject constructor() : ViewModel() {
+class NewContactViewModel @Inject constructor(
+    private val newContactRepo: INewContactRepo
+) : ViewModel() {
 
     var state by mutableStateOf(NewContactState())
 
@@ -58,6 +62,13 @@ class NewContactViewModel @Inject constructor() : ViewModel() {
         }
         viewModelScope.launch {
             validationEventChannel.send(ValidationEvent.Success)
+            newContactRepo.addToDatabase(
+                Contact(
+                    0,
+                    state.number,
+                    state.name
+                )
+            )
         }
     }
 }
