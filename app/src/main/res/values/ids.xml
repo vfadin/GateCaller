@@ -1,4 +1,4 @@
 <resources>
     <item name="home_fragment" type="id" />
-    <item name="new_item_fragment" type="id" />
+    <item name="new_contact_fragment" type="id" />
 </resources>

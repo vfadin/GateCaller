@@ -7,4 +7,8 @@
         android:id="@+id/home_fragment"
         android:name="com.gatecaller.ui.home.HomeFragment"
         android:label="Welcome" />
+    <fragment
+        android:id="@+id/new_contact_fragment"
+        android:name="com.gatecaller.ui.newContact.NewContactFragment"
+        android:label="NewContactFragment" />
 </navigation>
