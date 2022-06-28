@@ -7,7 +7,11 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.gatecaller.Screen
+import com.gatecaller.navigate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +24,15 @@ class NewContactFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.validationEvents.collect {
+                when(it) {
+                    ValidationEvent.Success -> {
+                        navigate(Screen.Home, Screen.NewContact)
+                    }
+                }
+            }
+        }
         return ComposeView(requireContext()).apply {
             setContent {
                 NewContactScreen(viewModel)

@@ -12,6 +12,9 @@ fun Fragment.navigate(to: Screen, from: Screen) {
     }
     when (to) {
         Screen.Home -> {
+            if (from == Screen.NewContact) {
+                findNavController().popBackStack()
+            }
             findNavController().navigate(R.id.home_fragment)
         }
         Screen.NewContact -> {

@@ -33,7 +33,6 @@ class NewContactViewModel @Inject constructor() : ViewModel() {
                 state = state.copy(number = event.number)
             }
             is NewContactEvent.Submit -> {
-                println(132)
                 submitData()
             }
         }
