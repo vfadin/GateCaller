@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.gatecaller.Screen
 import com.gatecaller.navigate
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -31,13 +29,13 @@ class HomeFragment : Fragment() {
                     viewModel
                 ) { event ->
                     when (event) {
-                        is HomeScreenEvent.AddButtonClick -> {
+                        is HomeScreenEvent.OnAddClick -> {
                             navigate(Screen.NewContact, Screen.Home)
                         }
                         is HomeScreenEvent.OnItemClick -> {
                             makeCall(event.number)
                         }
-                        is HomeScreenEvent.OnItemLongClick -> {
+                        is HomeScreenEvent.OnDeleteClick -> {
                             viewModel.deleteFromDatabaseById(event.id)
                         }
                     }

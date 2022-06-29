@@ -1,7 +1,7 @@
 package com.gatecaller.ui.home
 
 sealed class HomeScreenEvent {
-    object AddButtonClick : HomeScreenEvent()
+    object OnAddClick : HomeScreenEvent()
     data class OnItemClick(val number : String) : HomeScreenEvent()
-    data class OnItemLongClick(val id : Int) : HomeScreenEvent()
+    data class OnDeleteClick(val id : Int) : HomeScreenEvent()
 }

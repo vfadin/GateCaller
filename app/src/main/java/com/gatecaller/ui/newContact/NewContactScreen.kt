@@ -1,20 +1,14 @@
 package com.gatecaller.ui.newContact
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.gatecaller.Screen
-import com.gatecaller.navigate
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun NewContactScreen(
@@ -31,10 +25,21 @@ fun NewContactScreen(
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
                 Text(text = "Введите имя")
+            },
+            trailingIcon = {
+                state.nameError?.let {
+                    Icon(
+                        Icons.Filled.Error, null,
+                        tint = MaterialTheme.colors.error
+                    )
+                }
             }
         )
-        state.nameError?.let { 
-            Text(text = it)
+        state.nameError?.let {
+            Text(
+                text = it,
+                color = MaterialTheme.colors.error
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "Номер")
@@ -49,10 +54,23 @@ fun NewContactScreen(
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            trailingIcon = {
+                state.numberError?.let {
+                    Icon(
+                        Icons.Filled.Error, null,
+                        tint = MaterialTheme.colors.error
+                    )
+                }
+            }
         )
         state.numberError?.let {
-            Text(text = it)
+            Row(horizontalArrangement = Arrangement.End) {
+                Text(
+                    text = it,
+                    color = MaterialTheme.colors.error
+                )
+            }
         }
         Button(onClick = { viewModel.onEvent(NewContactEvent.Submit) }) {
             Text(text = "Добавить")

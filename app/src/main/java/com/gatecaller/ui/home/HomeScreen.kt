@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircleOutline
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -25,7 +26,7 @@ fun HomeScreen(
     Column {
         TopAppBar {
             Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { event(HomeScreenEvent.AddButtonClick) }) {
+            IconButton(onClick = { event(HomeScreenEvent.OnAddClick) }) {
                 Icon(imageVector = Icons.Filled.AddCircleOutline, contentDescription = null)
             }
         }
@@ -51,7 +52,6 @@ fun NumberCard(contact: Contact, event: (HomeScreenEvent) -> Unit) {
                 detectTapGestures(
                     onTap = { event(HomeScreenEvent.OnItemClick(contact.number)) },
                     onLongPress = {
-//                        event(HomeScreenEvent.OnItemLongClick(contact.id))
                         isMenuExpanded = true
                     }
                 )
@@ -69,8 +69,17 @@ fun NumberCard(contact: Contact, event: (HomeScreenEvent) -> Unit) {
                 modifier = Modifier.padding(4.dp)
             )
             DropdownMenu(expanded = isMenuExpanded, onDismissRequest = { isMenuExpanded = false }) {
-                DropdownMenuItem(onClick = { event(HomeScreenEvent.OnItemLongClick(contact.id)) }) {
-                    Text(text = "Удалить")
+                DropdownMenuItem(
+                    onClick = { event(HomeScreenEvent.OnDeleteClick(contact.id)) },
+                    Modifier.wrapContentWidth()
+                ) {
+                    Icon(Icons.Filled.Delete, null)
+                    Text(
+                        text = "Удалить",
+                        Modifier
+                            .fillMaxSize()
+                            .padding(4.dp)
+                    )
                 }
             }
         }
@@ -79,7 +88,10 @@ fun NumberCard(contact: Contact, event: (HomeScreenEvent) -> Unit) {
 
 @Composable
 fun NumbersList(dataList: List<Contact>, event: (HomeScreenEvent) -> Unit) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center
+    ) {
         items(dataList) { number ->
             NumberCard(contact = number, event)
         }
