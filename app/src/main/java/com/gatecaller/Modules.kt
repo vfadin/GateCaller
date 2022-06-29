@@ -29,7 +29,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideContactDao(database: ContactDatabase) = database.newsDao()
+    fun provideContactDao(database: ContactDatabase) = database.contactDao()
 }
 
 @Module

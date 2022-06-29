@@ -8,7 +8,7 @@ import com.gatecaller.data.entity.ApiContactDatabase
 
 @Database(entities = [ApiContactDatabase::class], version = 1)
 abstract class ContactDatabase : RoomDatabase() {
-    abstract fun newsDao(): ContactDao
+    abstract fun contactDao(): ContactDao
     companion object {
         @Volatile
         private var INSTANCE: ContactDatabase? = null

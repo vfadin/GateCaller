@@ -10,6 +10,6 @@ class NewContactRepo @Inject constructor(
     private val database: ContactDatabase
 ) : INewContactRepo {
     override suspend fun addToDatabase(contact: Contact) {
-        database.newsDao().insert(contact.toApiContactDatabase())
+        database.contactDao().insert(contact.toApiContactDatabase())
     }
 }

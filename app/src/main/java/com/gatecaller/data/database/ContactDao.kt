@@ -1,6 +1,9 @@
 package com.gatecaller.data.database
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.gatecaller.data.entity.ApiContactDatabase
 
 @Dao
@@ -13,6 +16,9 @@ interface ContactDao {
 
     @Query("DELETE FROM contacts")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM contacts WHERE id = :id")
+    suspend fun deleteById(id: Int)
 
     @Query("SELECT * FROM contacts")
     suspend fun getAll(): List<ApiContactDatabase>

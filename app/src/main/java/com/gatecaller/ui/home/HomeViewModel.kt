@@ -20,9 +20,14 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            println(homeRepo.getFromDatabase())
             _contactState.value = homeRepo.getFromDatabase()
         }
     }
 
+    fun deleteFromDatabaseById(id: Int) {
+        viewModelScope.launch {
+            homeRepo.deleteFromDatabaseById(id)
+            _contactState.value = homeRepo.getFromDatabase()
+        }
+    }
 }

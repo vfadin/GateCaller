@@ -9,8 +9,12 @@ class HomeRepo(
     private val database: ContactDatabase
 ) : IHomeRepo {
     override suspend fun getFromDatabase(): List<Contact> {
-        return database.newsDao().getAll().map {
+        return database.contactDao().getAll().map {
             it.toContact()
         }
+    }
+
+    override suspend fun deleteFromDatabaseById(id: Int) {
+        database.contactDao().deleteById(id)
     }
 }
