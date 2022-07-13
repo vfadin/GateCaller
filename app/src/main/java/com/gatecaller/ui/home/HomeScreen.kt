@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.AddCircleOutline
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
@@ -23,14 +24,43 @@ fun HomeScreen(
     event: (HomeScreenEvent) -> Unit
 ) {
     val state by viewModel.contactState.observeAsState(null)
+    val openDialog = remember { mutableStateOf(false) }
     Column {
         TopAppBar {
             Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { event(HomeScreenEvent.OnAddClick) }) {
+            IconButton(onClick = {
+                openDialog.value = true
+            }) {
                 Icon(imageVector = Icons.Filled.AddCircleOutline, contentDescription = null)
             }
         }
         Row {
+            if (openDialog.value) {
+                AlertDialog(
+                    onDismissRequest = {
+                        openDialog.value = false
+                    },
+                    buttons = {
+                        Column(
+                            modifier = Modifier.padding(all = 8.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Button(
+                                modifier = Modifier.fillMaxWidth(),
+                                onClick = { event(HomeScreenEvent.OnNewContactClick) }
+                            ) {
+                                Text("Новый контакт")
+                            }
+                            Button(
+                                modifier = Modifier.fillMaxWidth(),
+                                onClick = { event(HomeScreenEvent.OnExistContactClick) }
+                            ) {
+                                Text("Существующий контакт")
+                            }
+                        }
+                    }
+                )
+            }
             state?.let {
                 NumbersList(dataList = it, event)
             }

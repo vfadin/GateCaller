@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
                     viewModel
                 ) { event ->
                     when (event) {
-                        is HomeScreenEvent.OnAddClick -> {
+                        is HomeScreenEvent.OnNewContactClick -> {
                             navigate(Screen.NewContact, Screen.Home)
                         }
                         is HomeScreenEvent.OnItemClick -> {
@@ -37,6 +37,9 @@ class HomeFragment : Fragment() {
                         }
                         is HomeScreenEvent.OnDeleteClick -> {
                             viewModel.deleteFromDatabaseById(event.id)
+                        }
+                        is HomeScreenEvent.OnExistContactClick -> {
+                           navigate(Screen.ExistContact, Screen.Home)
                         }
                     }
                 }
