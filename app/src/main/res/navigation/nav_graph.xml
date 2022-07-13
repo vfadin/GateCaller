@@ -11,4 +11,8 @@
         android:id="@+id/new_contact_fragment"
         android:name="com.gatecaller.ui.newContact.NewContactFragment"
         android:label="NewContactFragment" />
+    <fragment
+        android:id="@+id/exist_contact_fragment"
+        android:name="com.gatecaller.ui.existContact.ExistContactFragment"
+        android:label="ExistContactFragment" />
 </navigation>

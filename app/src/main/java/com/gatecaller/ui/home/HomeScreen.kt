@@ -23,7 +23,7 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     event: (HomeScreenEvent) -> Unit
 ) {
-    val state by viewModel.contactState.observeAsState(null)
+    val contactState by viewModel.contactState.observeAsState(null)
     val openDialog = remember { mutableStateOf(false) }
     Column {
         TopAppBar {
@@ -61,7 +61,7 @@ fun HomeScreen(
                     }
                 )
             }
-            state?.let {
+            contactState?.let {
                 NumbersList(dataList = it, event)
             }
         }

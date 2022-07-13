@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import java.security.InvalidParameterException
 
-enum class Screen { Home, NewContact }
+enum class Screen { Home, NewContact, ExistContact }
 
 fun Fragment.navigate(to: Screen, from: Screen) {
     if (to == from) {
@@ -12,13 +12,14 @@ fun Fragment.navigate(to: Screen, from: Screen) {
     }
     when (to) {
         Screen.Home -> {
-            if (from == Screen.NewContact) {
-                findNavController().popBackStack()
-            }
+            findNavController().popBackStack()
             findNavController().navigate(R.id.home_fragment)
         }
         Screen.NewContact -> {
             findNavController().navigate(R.id.new_contact_fragment)
+        }
+        Screen.ExistContact -> {
+            findNavController().navigate(R.id.exist_contact_fragment)
         }
     }
 }

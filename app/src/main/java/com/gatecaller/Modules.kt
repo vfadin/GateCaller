@@ -2,14 +2,17 @@ package com.gatecaller
 
 import android.content.Context
 import com.gatecaller.data.database.ContactDatabase
+import com.gatecaller.data.repo.ExistContactRepo
 import com.gatecaller.data.repo.HomeRepo
 import com.gatecaller.data.repo.NewContactRepo
+import com.gatecaller.domain.repo.IExistContactRepo
 import com.gatecaller.domain.repo.IHomeRepo
 import com.gatecaller.domain.repo.INewContactRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.components.SingletonComponent
@@ -46,5 +49,14 @@ object RepositoryModule {
     @ActivityRetainedScoped
     fun provideNewContactRepo(database: ContactDatabase): INewContactRepo {
         return NewContactRepo(database)
+    }
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideExistContactRepo(
+        database: ContactDatabase,
+        @ApplicationContext context: Context
+    ): IExistContactRepo {
+        return ExistContactRepo(database, context)
     }
 }

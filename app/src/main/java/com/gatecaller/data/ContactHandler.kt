@@ -1,9 +1,8 @@
-package com.gatecaller.ui.home
+package com.gatecaller.data
 
 import android.content.Context
 import android.provider.ContactsContract
 import com.gatecaller.domain.entity.Contact
-
 
 abstract class ContactHandler() {
     companion object {
@@ -14,7 +13,7 @@ abstract class ContactHandler() {
                 null,
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                 null,
-                null
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
             )
             phoneCursor?.apply {
                 while (moveToNext()) {
