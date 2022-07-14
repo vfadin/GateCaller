@@ -7,8 +7,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.gatecaller.R
 
 @Composable
 fun NewContactScreen(
@@ -16,7 +18,7 @@ fun NewContactScreen(
 ) {
     val state = viewModel.state
     Column {
-        Text(text = "Имя контакта")
+        Text(text = stringResource(R.string.contact_name))
         TextField(
             value = state.name,
             onValueChange = {
@@ -24,7 +26,7 @@ fun NewContactScreen(
             },
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
-                Text(text = "Введите имя")
+                Text(text = stringResource(R.string.input_name))
             },
             trailingIcon = {
                 state.nameError?.let {
@@ -42,7 +44,7 @@ fun NewContactScreen(
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Номер")
+        Text(text = stringResource(R.string.number))
         TextField(
             value = viewModel.state.number,
             onValueChange = {
@@ -50,7 +52,7 @@ fun NewContactScreen(
             },
             modifier = Modifier.fillMaxWidth(),
             placeholder = {
-                Text(text = "Введите номер")
+                Text(text = stringResource(R.string.input_number))
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
@@ -73,7 +75,7 @@ fun NewContactScreen(
             }
         }
         Button(onClick = { viewModel.onEvent(NewContactEvent.Submit) }) {
-            Text(text = "Добавить")
+            Text(text = stringResource(R.string.add))
         }
     }
 

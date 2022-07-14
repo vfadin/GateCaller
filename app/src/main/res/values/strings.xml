@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">GateCaller</string>
     <string name="database_name">contacts</string>
+    <string name="number">Номер</string>
+    <string name="input_number">Введите номер</string>
+    <string name="add">Добавить</string>
+    <string name="contact_name">Имя контакта</string>
+    <string name="input_name">Введите имя</string>
+    <string name="delete">Удалить</string>
+    <string name="new_contact">Новый контакт</string>
+    <string name="exist_contact">Существующий контакт</string>
 </resources>

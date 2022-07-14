@@ -13,9 +13,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.gatecaller.R
 import com.gatecaller.domain.entity.Contact
 
 @Composable
@@ -49,13 +51,13 @@ fun HomeScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 onClick = { event(HomeScreenEvent.OnNewContactClick) }
                             ) {
-                                Text("Новый контакт")
+                                Text(stringResource(R.string.new_contact))
                             }
                             Button(
                                 modifier = Modifier.fillMaxWidth(),
                                 onClick = { event(HomeScreenEvent.OnExistContactClick) }
                             ) {
-                                Text("Существующий контакт")
+                                Text(stringResource(R.string.exist_contact))
                             }
                         }
                     }
@@ -105,7 +107,7 @@ fun NumberCard(contact: Contact, event: (HomeScreenEvent) -> Unit) {
                 ) {
                     Icon(Icons.Filled.Delete, null)
                     Text(
-                        text = "Удалить",
+                        text = stringResource(R.string.delete),
                         Modifier
                             .fillMaxSize()
                             .padding(4.dp)
