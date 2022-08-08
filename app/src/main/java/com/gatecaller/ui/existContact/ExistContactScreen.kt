@@ -9,21 +9,44 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.gatecaller.R
 import com.gatecaller.domain.entity.Contact
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExistContactScreen(
     viewModel: ExistContactViewModel,
     event: (ExistContactEvent) -> Unit
 ) {
     val contactState by viewModel.contactState.observeAsState(null)
-    contactState?.let {
-        NumbersList(dataList = it, event = event)
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Scaffold(
+            topBar = {
+                CenterAlignedTopAppBar(
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                        titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                    title = { Text(text = stringResource(R.string.shoose_exist_contact)) }
+                )
+            },
+        ) { padding ->
+            Box(modifier = Modifier.padding(padding)) {
+                contactState?.let {
+                    NumbersList(dataList = it, event = event)
+                }
+            }
+        }
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,7 +86,9 @@ fun NumberCard(contact: Contact, event: (ExistContactEvent) -> Unit) {
 @Composable
 fun NumbersList(dataList: List<Contact>, event: (ExistContactEvent) -> Unit) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(0.dp,8.dp),
         verticalArrangement = Arrangement.Center
     ) {
         items(dataList) { number ->

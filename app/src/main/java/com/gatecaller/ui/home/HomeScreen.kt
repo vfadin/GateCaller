@@ -47,44 +47,46 @@ fun HomeScreen(
                         }
                     }
                 )
-            }) {
-            if (openDialog.value) {
-                AlertDialog(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    onDismissRequest = {
-                        openDialog.value = false
-                    },
-                    confirmButton = {
-                        Column(
-                            modifier = Modifier.padding(all = 8.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Button(
-                                modifier = Modifier.fillMaxWidth(),
-                                onClick = { event(HomeScreenEvent.OnNewContactClick) },
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
+            }) { paddingValues ->
+            Box(modifier = Modifier.padding(paddingValues)) {
+                if (openDialog.value) {
+                    AlertDialog(
+                        containerColor = MaterialTheme.colorScheme.background,
+                        onDismissRequest = {
+                            openDialog.value = false
+                        },
+                        confirmButton = {
+                            Column(
+                                modifier = Modifier.padding(all = 8.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Text(stringResource(R.string.new_contact))
-                            }
-                            Button(
-                                modifier = Modifier.fillMaxWidth(),
-                                onClick = { event(HomeScreenEvent.OnExistContactClick) },
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            ) {
-                                Text(stringResource(R.string.exist_contact))
+                                Button(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    onClick = { event(HomeScreenEvent.OnNewContactClick) },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                ) {
+                                    Text(stringResource(R.string.new_contact))
+                                }
+                                Button(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    onClick = { event(HomeScreenEvent.OnExistContactClick) },
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                ) {
+                                    Text(stringResource(R.string.exist_contact))
+                                }
                             }
                         }
-                    }
-                )
-            }
-            contactState?.let {
-                NumbersList(dataList = it, event)
+                    )
+                }
+                contactState?.let {
+                    NumbersList(dataList = it, event)
+                }
             }
         }
     }
@@ -110,5 +112,5 @@ fun ScreenPreview() {
         Contact(0, "+79930206616", "Myself"),
         Contact(0, "+79913289321", "Gate1")
     )
-    com.gatecaller.ui.existContact.NumbersList(dataList = datalist, event = { })
+    NumbersList(dataList = datalist, event = { })
 }

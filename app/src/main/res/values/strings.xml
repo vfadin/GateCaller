@@ -10,4 +10,5 @@
     <string name="new_contact">Новый контакт</string>
     <string name="exist_contact">Существующий контакт</string>
     <string name="contacts">Контакты</string>
+    <string name="shoose_exist_contact">Выберите контакт</string>
 </resources>
